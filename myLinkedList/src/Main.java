@@ -1,3 +1,4 @@
+import java.util.Iterator;
 
 class Main {
     public static void main(String[] args) {
@@ -28,17 +29,16 @@ class Main {
         list.addAtIndex(6, 35); // Adding 35 at the end
         System.out.println("List after adding 35 at the end: ");
         list.print(); // Expected output: 2 -> 5 -> 10 -> 15 -> 20 -> 30 -> 35
-        System.out.println(list.contains(8));
-        System.out.println(list.contains(2));
-        System.out.println(list.contains(35));
-        System.out.println(list.contains(25));
-        System.out.println(list.contains(20));
-        System.out.println(list.getFirst());
-        System.out.println(list.getLast());
-        System.out.println(list.getAtIndex(0));
-        System.out.println(list.getAtIndex(10));
-        System.out.println(list.getAtIndex(5));
 
+        list.removeAtIndex(5);
+        list.print();
+        list.print();
+        list.print();
+        list.print();
+        for (int x : list) {
+            System.out.println(x);
+        }
+        list.forEach(i -> System.out.println(i + 10));
 
     }
 }

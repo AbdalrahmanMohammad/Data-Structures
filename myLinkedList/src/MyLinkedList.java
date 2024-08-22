@@ -1,5 +1,6 @@
+import java.util.Iterator;
 
-public class MyLinkedList<T> {
+public class MyLinkedList<T> implements Iterable<T> {
     int size;
     Node<T> head;
     Node<T> tail;
@@ -87,15 +88,66 @@ public class MyLinkedList<T> {
         }
     }
 
-    public boolean contains(T val)
-    {
+    public boolean contains(T val) {
         Node<T> temp = head;
-        while (temp!=null) {
-            if(temp.getValue().equals(val))
-            return true;
+        while (temp != null) {
+            if (temp.getValue().equals(val))
+                return true;
             temp = temp.getNext();
         }
         return false;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void clear() {
+        size = 0;
+        head = tail;
+        tail = null;
+    }
+
+    public void removeFirst() {
+        if (size <= 1) {
+            clear();
+            return;
+        }
+        head = head.getNext();
+        size--;
+        if (head == null)
+            tail = null;
+    }
+
+    public void removeLast() {
+        if (size <= 1) {
+            clear();
+            return;
+        }
+        Node<T> temp = head;
+        while (temp.getNext() != tail) {
+            temp = temp.getNext();
+        }
+        temp.setNext(null);
+        tail = temp;
+        size--;
+    }
+
+    public void removeAtIndex(int k) {
+        if (k < 0 || k >= size) {
+            System.out.println("out of bound");
+        } else if (k == 0) {
+            removeFirst();
+        } else if (k == size - 1) {
+            removeLast();
+        } else {
+            Node<T> temp = head;
+            for (int i = 0; i < k - 1; i++) {
+                temp = temp.getNext();
+            }
+            temp.setNext(temp.getNext().getNext());
+            size--;
+        }
     }
 
     public void print() {
@@ -108,8 +160,32 @@ public class MyLinkedList<T> {
         if (ans.length() > 2) {
             ans.setLength(ans.length() - 2); // Remove the last " | "
         }
-        ans.append(" }");
+        ans.append(" } ");
+        ans.append(size);
         System.out.println(ans.toString());
     }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new myIterator();
+    }
+
+    private class myIterator implements Iterator<T>{
+        Node<T> temp=head;
+
+        @Override
+        public boolean hasNext() {
+            return temp!=null;
+        }
+
+        @Override
+        public T next() {
+            T x= temp.getValue();
+            temp=temp.getNext();
+            return x;
+        }
+
+    }
+
 
 }
