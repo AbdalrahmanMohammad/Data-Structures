@@ -91,4 +91,53 @@ public class MyDoublyLinkedList<T> {
         System.out.println(ans.toString());
     }
 
+    public int getSize() {
+        return size;
+    }
+
+    public T getFirst() {
+        return head.getValue();
+    }
+
+    public T getLast() {
+        return tail.getValue();
+    }
+
+    public T getAtIndex(int k) {
+        if (k >= size || k < 0) {
+            System.out.println("that is out of range");
+            return null;
+        } else if (k == 0) {
+            return getFirst();
+        } else if (k == size - 1) {
+            return getLast();
+        } else {
+            Node<T> temp = head;
+            for (int i = 0; i < k; i++) {
+                temp = temp.getNext();
+            }
+            return temp.getValue();
+        }
+    }
+
+    public boolean contains(T val) {
+        Node<T> temp = head;
+        while (temp != null) {
+            if (temp.getValue().equals(val))
+                return true;
+            temp = temp.getNext();
+        }
+        return false;
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public void clear() {
+        size = 0;
+        head = tail;
+        tail = null;
+    }
+
 }
