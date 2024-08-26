@@ -136,8 +136,47 @@ public class MyDoublyLinkedList<T> {
 
     public void clear() {
         size = 0;
-        head = tail;
+        head = null;
         tail = null;
+    }
+
+    public void removeFirst() {
+        if (size <= 1) {
+            clear();
+            return;
+        }
+        head = head.getNext();
+        head.setPrevious(null);
+        size--;
+
+    }
+
+    public void removeLast() {
+        if (size <= 1) {
+            clear();
+            return;
+        }
+        tail = tail.getPrevious();
+        tail.setNext(null);
+        size--;
+    }
+
+    public void removeAtIndex(int k) {
+        if (k < 0 || k >= size) {
+            System.out.println("out of bound");
+        } else if (k == 0) {
+            removeFirst();
+        } else if (k == size - 1) {
+            removeLast();
+        } else {
+            Node<T> temp = head;
+            for (int i = 0; i < k - 1; i++) {
+                temp = temp.getNext();
+            }
+            temp.setNext(temp.getNext().getNext());
+            temp.getNext().setPrevious(temp);
+            size--;
+        }
     }
 
 }
