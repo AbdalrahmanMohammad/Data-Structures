@@ -1,4 +1,6 @@
-public class MyDoublyLinkedList<T> {
+import java.util.Iterator;
+
+public class MyDoublyLinkedList<T> implements Iterable<T> {
     int size;
     Node<T> head;
     Node<T> tail;
@@ -177,6 +179,28 @@ public class MyDoublyLinkedList<T> {
             temp.getNext().setPrevious(temp);
             size--;
         }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new myIterator();
+    }
+
+    private class myIterator implements Iterator<T> {
+        Node<T> temp = head;
+
+        @Override
+        public boolean hasNext() {
+            return temp != null;
+        }
+
+        @Override
+        public T next() {
+            T x = temp.getValue();
+            temp = temp.getNext();
+            return x;
+        }
+
     }
 
 }

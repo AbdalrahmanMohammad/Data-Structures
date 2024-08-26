@@ -17,6 +17,10 @@ public class Main {
         list.removeFirst();
         System.out.println("After removeFirst:");
         list.print(); // Should print { 20 | 30 | 40 | 50 } size: 4
+        for(int a:list)
+        {
+            System.out.println(a+1);
+        }
 
         // Test removeLast
         list.removeLast();
