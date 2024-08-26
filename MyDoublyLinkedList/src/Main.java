@@ -12,6 +12,7 @@ public class Main {
         // Print the list
         System.out.println("Initial list:");
         list.print(); // Should print { 10 | 20 | 30 | 40 | 50 } size: 5
+        list.reverse2();
         list.reverse();
         list.print();
 

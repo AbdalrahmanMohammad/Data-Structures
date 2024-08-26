@@ -216,4 +216,22 @@ public class MyDoublyLinkedList<T> implements Iterable<T> {
         tail = temp;
     }
 
+    public void reverse2() {
+        Node<T> headd = head, taill = tail;
+
+        Node<T> temp, prev = null;
+
+        while (head != null) {
+            temp = head.getNext();
+            head.setNext(prev);
+            head.setPrevious(temp);
+            prev = head;
+            head = temp;
+        }
+
+        temp = headd;
+        head = taill;
+        tail = temp;
+    }
+
 }
