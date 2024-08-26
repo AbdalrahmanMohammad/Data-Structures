@@ -203,4 +203,17 @@ public class MyDoublyLinkedList<T> implements Iterable<T> {
 
     }
 
+    public void reverse() {
+        Node<T> temp = head, headd = head, taill = tail;
+        while (temp != null) {
+            Node<T> aa = temp.getNext();
+            temp.setNext(temp.getPrevious());
+            temp.setPrevious(aa);
+            temp = temp.getPrevious();
+        }
+        temp = headd;
+        head = taill;
+        tail = temp;
+    }
+
 }

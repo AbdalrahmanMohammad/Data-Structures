@@ -12,16 +12,13 @@ public class Main {
         // Print the list
         System.out.println("Initial list:");
         list.print(); // Should print { 10 | 20 | 30 | 40 | 50 } size: 5
+        list.reverse();
+        list.print();
 
         // Test removeFirst
         list.removeFirst();
         System.out.println("After removeFirst:");
         list.print(); // Should print { 20 | 30 | 40 | 50 } size: 4
-        for(int a:list)
-        {
-            System.out.println(a+1);
-        }
-
         // Test removeLast
         list.removeLast();
         System.out.println("After removeLast:");
