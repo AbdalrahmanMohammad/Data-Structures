@@ -234,4 +234,27 @@ public class MyDoublyLinkedList<T> implements Iterable<T> {
         tail = temp;
     }
 
+    public void reverse3() {
+        Node<T> temp = head, headd = head, taill = tail;
+        reverseHelper(temp);
+        temp = headd;
+        head = taill;
+        tail = temp;
+        tail.setNext(null);
+        head.setPrevious(null);
+    }
+
+    public Node<T> reverseHelper(Node<T> head) {
+        if (head == null || head.getNext() == null) {
+            return head;
+        }
+
+        Node<T> next=head.getNext();
+        Node<T> rest = reverseHelper(head.getNext());
+        next.setNext(head);
+        head.setPrevious(next);
+        return rest;
+
+    }
+
 }
