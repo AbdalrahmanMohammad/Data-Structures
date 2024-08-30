@@ -104,7 +104,7 @@ public class MyLinkedList<T> implements Iterable<T> {
 
     public void clear() {
         size = 0;
-        head = tail;
+        head = null;
         tail = null;
     }
 
