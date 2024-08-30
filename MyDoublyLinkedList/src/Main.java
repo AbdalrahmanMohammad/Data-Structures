@@ -12,11 +12,9 @@ public class Main {
         list.add(50);
         System.out.print("List after adding elements (10, 20, 30): ");
         list.print(); // Expected: { 10 | 20 | 30 } 3
-        list.pr();
 
-        list.reverse();
+        list.rotate(6);
         list.print();
-        list.pr();
 
     }
 }

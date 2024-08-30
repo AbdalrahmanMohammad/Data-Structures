@@ -207,11 +207,27 @@ public class MyCircularLinkedList<T> implements Iterable<T> {
             temp.setNext(prev);
             prev = temp;
             temp = save;
-        }while (temp!=head);
+        } while (temp != head);
 
         temp = head;
         head = tail;
         tail = temp;
+    }
+
+    public void rotate(int k) {
+        if (head == null || size <= 1) {
+            return;
+        }
+        k = k % size; // Normalize k to avoid unnecessary rotations
+        if (k == 0) {
+            return;
+        }
+        Node<T> temp = head;
+        for (int i = 0; i < k - 1; i++) {
+            temp = temp.getNext();
+        }
+        tail=temp;
+        head=tail.getNext();
     }
 
 }
