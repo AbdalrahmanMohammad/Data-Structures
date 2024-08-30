@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class MyCircularLinkedList<T> {
+public class MyCircularLinkedList<T> implements Iterable<T> {
     int size;
     Node<T> head;
     Node<T> tail;
@@ -173,27 +173,32 @@ public class MyCircularLinkedList<T> {
         }
     }
 
-    // @Override
-    // public Iterator<T> iterator() {
-    // return new myIterator();
-    // }
+    @Override
+    public Iterator<T> iterator() {
+        return new myIterator();
+    }
 
-    // private class myIterator implements Iterator<T> {
-    // Node<T> temp = head;
+    private class myIterator implements Iterator<T> {
+        Node<T> temp = head;
+        boolean flag = true;
 
-    // @Override
-    // public boolean hasNext() {
-    // return temp != null;
-    // }
+        @Override
+        public boolean hasNext() {
+            if (head == null)
+                return false;
+            else
+                return temp != head || flag;
+        }
 
-    // @Override
-    // public T next() {
-    // T x = temp.getValue();
-    // temp = temp.getNext();
-    // return x;
-    // }
+        @Override
+        public T next() {
+            flag = false;
+            T x = temp.getValue();
+            temp = temp.getNext();
+            return x;
+        }
 
-    // }
+    }
 
     // public void reverse() {
     // Node<T> temp = head, headd = head, taill = tail;
