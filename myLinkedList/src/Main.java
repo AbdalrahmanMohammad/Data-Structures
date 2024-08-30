@@ -1,44 +1,48 @@
 import java.util.Iterator;
+import java.util.LinkedList;
 
 class Main {
     public static void main(String[] args) {
-        // Create a new linked list
-        MyLinkedList<Integer> list = new MyLinkedList<>();
+          MyLinkedList<Integer> list = new MyLinkedList<>();
 
-        // Test addLast method
-        list.add(10); // Adding 10 to the end
-        list.add(20); // Adding 20 to the end
-        list.add(30); // Adding 30 to the end
-        System.out.println("List after adding elements: ");
-        list.print(); // Expected output: 10 -> 20 -> 30
+        // Add elements to the list
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
+        list.add(5);
 
-        // Test addFirst method
-        list.addFirst(5); // Adding 5 to the beginning
-        System.out.println("List after adding 5 at the beginning: ");
-        list.print(); // Expected output: 5 -> 10 -> 20 -> 30
-
-        // Test addAtIndex method
-        list.addAtIndex(2, 15); // Adding 15 at index 2
-        System.out.println("List after adding 15 at index 2: ");
-        list.print(); // Expected output: 5 -> 10 -> 15 -> 20 -> 30
-
-        list.addAtIndex(0, 2); // Adding 2 at index 0
-        System.out.println("List after adding 2 at index 0: ");
-        list.print(); // Expected output: 2 -> 5 -> 10 -> 15 -> 20 -> 30
-
-        list.addAtIndex(6, 35); // Adding 35 at the end
-        System.out.println("List after adding 35 at the end: ");
-        list.print(); // Expected output: 2 -> 5 -> 10 -> 15 -> 20 -> 30 -> 35
-
-        list.removeAtIndex(5);
+        System.out.println("Original list:");
         list.print();
-        list.print();
-        list.print();
-        list.print();
-        for (int x : list) {
-            System.out.println(x);
-        }
-        list.forEach(i -> System.out.println(i + 10));
 
+        // Test 1: Swap nodes in the middle (indexes 1 and 3)
+        list.swap(1, 3);
+        System.out.println("After swapping indexes 1 and 3 (2 <-> 4):");
+        list.print();
+
+        // Test 2: Swap head and tail (indexes 0 and 4)
+        list.swap(0, 4);
+        System.out.println("After swapping head and tail (1 <-> 5):");
+        list.print();
+
+        // Test 3: Swap adjacent nodes (indexes 2 and 3)
+        list.swap(2, 3);
+        System.out.println("After swapping adjacent nodes (3 <-> 1):");
+        list.print();
+
+        // Test 4: Swap with itself (indexes 2 and 2)
+        list.swap(2, 2);
+        System.out.println("After swapping index 2 with itself:");
+        list.print();
+
+        // Test 5: Invalid indices (out of bounds)
+        list.swap(-1, 10);  // Should print "falsy inputs"
+        System.out.println("After attempting to swap with invalid indices (-1, 10):");
+        list.print();
+
+        // Test 6: Swap with the first node (index 0) and a middle node (index 2)
+        list.swap(0, 2);
+        System.out.println("After swapping head with a middle node (5 <-> 3):");
+        list.print();
     }
 }

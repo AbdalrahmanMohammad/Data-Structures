@@ -170,21 +170,76 @@ public class MyLinkedList<T> implements Iterable<T> {
         return new myIterator();
     }
 
-    private class myIterator implements Iterator<T>{
-        Node<T> temp=head;
+    private class myIterator implements Iterator<T> {
+        Node<T> temp = head;
 
         @Override
         public boolean hasNext() {
-            return temp!=null;
+            return temp != null;
         }
 
         @Override
         public T next() {
-            T x= temp.getValue();
-            temp=temp.getNext();
+            T x = temp.getValue();
+            temp = temp.getNext();
             return x;
         }
 
+    }
+
+    public Node<T> getNode(int k) {
+        if (k >= size) {
+            System.out.println("that is out of range");
+            return null;
+        } else if (k == 0) {
+            return head;
+        } else if (k == size - 1) {
+            return tail;
+        } else {
+            Node<T> temp = head;
+            for (int i = 0; i < k; i++) {
+                temp = temp.getNext();
+            }
+            return temp;
+        }
+    }
+
+    public void swap(int first, int second) {
+        if (first > second) {
+            int temp = first;
+            first = second;
+            second = temp;
+        }
+        if (first == second)
+            return;
+        if (first < 0 || second >= size) {
+            System.out.println("falsy inputs");
+            return;
+        }
+        Node<T> firstprev, secondprev, firstnode, secondnode;
+        if (first == 0) {
+            firstnode = head;
+            firstprev = null;
+        } else {
+            firstprev = getNode(first - 1);
+            firstnode = firstprev.getNext();
+        }
+        secondprev = getNode(second - 1);
+        secondnode = secondprev.getNext();
+
+        if (firstprev != null)
+            firstprev.setNext(secondnode);
+
+        secondprev.setNext(firstnode);
+
+        Node<T> tempNext = firstnode.getNext();///
+        firstnode.setNext(secondnode.getNext());///
+        secondnode.setNext(tempNext);///
+
+        if (firstprev == null)
+            head = secondnode;
+        if (secondnode.getNext() == null)
+            tail = firstnode;
     }
 
 
