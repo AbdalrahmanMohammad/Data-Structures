@@ -200,58 +200,18 @@ public class MyCircularLinkedList<T> implements Iterable<T> {
 
     }
 
-    // public void reverse() {
-    // Node<T> temp = head, headd = head, taill = tail;
-    // while (temp != null) {
-    // Node<T> aa = temp.getNext();
-    // temp.setNext(temp.getPrevious());
-    // temp.setPrevious(aa);
-    // temp = temp.getPrevious();
-    // }
-    // temp = headd;
-    // head = taill;
-    // tail = temp;
-    // }
+    public void reverse() {
+        Node<T> temp = head, prev = tail, save;
+        do {
+            save = temp.getNext();
+            temp.setNext(prev);
+            prev = temp;
+            temp = save;
+        }while (temp!=head);
 
-    // public void reverse2() {
-    // Node<T> headd = head, taill = tail;
-
-    // Node<T> temp, prev = null;
-
-    // while (head != null) {
-    // temp = head.getNext();
-    // head.setNext(prev);
-    // head.setPrevious(temp);
-    // prev = head;
-    // head = temp;
-    // }
-
-    // temp = headd;
-    // head = taill;
-    // tail = temp;
-    // }
-
-    // public void reverse3() {
-    // Node<T> temp = head, headd = head, taill = tail;
-    // reverseHelper(temp);
-    // temp = headd;
-    // head = taill;
-    // tail = temp;
-    // tail.setNext(null);
-    // head.setPrevious(null);
-    // }
-
-    // public Node<T> reverseHelper(Node<T> head) {
-    // if (head == null || head.getNext() == null) {
-    // return head;
-    // }
-
-    // Node<T> next=head.getNext();
-    // Node<T> rest = reverseHelper(head.getNext());
-    // next.setNext(head);
-    // head.setPrevious(next);
-    // return rest;
-
-    // }
+        temp = head;
+        head = tail;
+        tail = temp;
+    }
 
 }

@@ -5,24 +5,18 @@ public class Main {
         // Test isEmpty() on a new list
         System.out.println("List is empty: " + list.isEmpty()); // Expected: true
 
-        // Test add(T val) and print()
-        // list.add(10);
-        // list.add(20);
-        // list.add(30);
+        list.add(10);
+        list.add(20);
+        list.add(30);
+        list.add(40);
+        list.add(50);
         System.out.print("List after adding elements (10, 20, 30): ");
         list.print(); // Expected: { 10 | 20 | 30 } 3
+        list.pr();
 
-        // Test addFirst(T val)
-        list.addFirst(5);
-        System.out.print("List after addFirst(5): ");
-        list.print(); // Expected: { 5 | 10 | 20 | 30 } 4
+        list.reverse();
+        list.print();
+        list.pr();
 
-        System.out.println("****************");
-        for (int i : list)
-            System.out.println(i);
-        System.out.println("****************");
-
-        for (int i : list)
-            System.out.println(i);
     }
 }
