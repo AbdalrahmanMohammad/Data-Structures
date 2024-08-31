@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class MyLinkedList<T> implements Iterable<T> {
+public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
     int size;
     Node<T> head;
     Node<T> tail;
@@ -242,5 +242,16 @@ public class MyLinkedList<T> implements Iterable<T> {
             tail = firstnode;
     }
 
+    public void sort() {
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - 1 - i; j++) {
+                Node<T> cur=getNode(j);
+                T current=cur.getValue(),next=cur.getNext().getValue();
+                if (current.compareTo(next)>0) {
+                    swap(j, j + 1);
+                }
+            }
+        }
+    }
 
 }
