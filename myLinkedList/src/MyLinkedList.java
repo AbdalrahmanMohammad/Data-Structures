@@ -254,4 +254,19 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
         }
     }
 
+    public void reverse()
+    {
+        Node temp=head,prev=null;
+        while(temp!=null)
+        {
+            Node nxt=temp.getNext();
+            temp.setNext(prev);
+            prev=temp;
+            temp=nxt;
+        }
+        temp=head;
+        head=tail;
+        tail=temp;
+    }
+
 }

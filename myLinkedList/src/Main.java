@@ -12,7 +12,9 @@ class Main {
         list.add(1);
         list.add(3);
         list.print();
-        list.sort();
+        list.reverse();
+        // list.add(77);
+
         list.print();
 
     }
