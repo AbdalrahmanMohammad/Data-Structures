@@ -245,28 +245,43 @@ public class MyLinkedList<T extends Comparable<T>> implements Iterable<T> {
     public void sort() {
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - 1 - i; j++) {
-                Node<T> cur=getNode(j);
-                T current=cur.getValue(),next=cur.getNext().getValue();
-                if (current.compareTo(next)>0) {
+                Node<T> cur = getNode(j);
+                T current = cur.getValue(), next = cur.getNext().getValue();
+                if (current.compareTo(next) > 0) {
                     swap(j, j + 1);
                 }
             }
         }
     }
 
-    public void reverse()
-    {
-        Node temp=head,prev=null;
-        while(temp!=null)
-        {
-            Node nxt=temp.getNext();
+    public void reverse() {
+        Node temp = head, prev = null;
+        while (temp != null) {
+            Node nxt = temp.getNext();
             temp.setNext(prev);
-            prev=temp;
-            temp=nxt;
+            prev = temp;
+            temp = nxt;
         }
-        temp=head;
-        head=tail;
-        tail=temp;
+        temp = head;
+        head = tail;
+        tail = temp;
+    }
+
+    public void reverse2() {
+        reverse2helper(head);
+        Node temp = tail;
+        tail = head;
+        head = temp;
+    }
+
+    public Node reverse2helper(Node n) {
+        if (n == null || n.getNext() == null)
+            return n;
+
+        Node nxt = reverse2helper(n.getNext());
+        nxt.setNext(n);
+        n.setNext(null);
+        return n;
     }
 
 }
