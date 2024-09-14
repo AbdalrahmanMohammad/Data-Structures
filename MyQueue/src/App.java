@@ -1,56 +1,108 @@
 public class App {
-    public static void main(String[] args) throws Exception {
-        // Test Case 1: Enqueue and Dequeue Operations
-        System.out.println("Test Case 1: Enqueue and Dequeue Operations");
-        MyQueue<Integer> queue1 = new MyQueue<>(5);
-        queue1.enqueue(1);
-        queue1.enqueue(2);
-        queue1.enqueue(3);
-        queue1.display(); // Expected: {1 2 3}
-        System.out.println("\nDequeued element: " + queue1.dequeue()); // Expected: 1
-        queue1.display(); // Expected: {2 3}
-        System.out.println();
+    public static void main(String[] args) {
+        // Create a circular queue with a capacity of 5
+        MyCircularQueue<Integer> queue = new MyCircularQueue<>(5);
 
-        // Test Case 2: Peek Operation
-        System.out.println("Test Case 2: Peek Operation");
-        System.out.println("Peek element: " + queue1.peek()); // Expected: 2
-        System.out.println();
+        // Test isEmpty on an empty queue
+        System.out.println("Is the queue empty? " + queue.isempty()); // true
 
-        // Test Case 3: Check Empty Queue
-        System.out.println("Test Case 3: Check Empty Queue");
-        MyQueue<Integer> queue2 = new MyQueue<>(3);
-        System.out.println("Is queue empty? " + queue2.isempty()); // Expected: true
-        queue2.enqueue(5);
-        System.out.println("Is queue empty? " + queue2.isempty()); // Expected: false
-        System.out.println("Dequeued element: " + queue2.dequeue()); // Expected: 5
-        System.out.println("Is queue empty? " + queue2.isempty()); // Expected: true
-        System.out.println();
+        // Test enqueue operation
+        System.out.println("\nEnqueueing elements...");
+        queue.enqueue(10);
+        queue.enqueue(20);
+        queue.enqueue(30);
+        queue.enqueue(40);
+        queue.enqueue(50);
+        
+        // The queue should be full now
+        System.out.println("Is the queue full? " + queue.isfull()); // true
+        queue.enqueue(60); // This should print "queue is full"
 
-        // Test Case 4: Check Full Queue
-        System.out.println("Test Case 4: Check Full Queue");
-        MyQueue<Integer> queue3 = new MyQueue<>(2);
-        queue3.enqueue(10);
-        queue3.enqueue(20);
-        queue3.enqueue(30); // Expected: queue is full
-        queue3.display(); // Expected: {10 20}
-        System.out.println();
+        // Display the queue contents
+        System.out.print("Queue after enqueues: ");
+        queue.display(); // Output should be {10 20 30 40 50}
 
-        // Test Case 5: Queue Size and Clear Operations
-        System.out.println("Test Case 5: Queue Size and Clear Operations");
-        MyQueue<String> queue4 = new MyQueue<>(4);
-        queue4.enqueue("a");
-        queue4.enqueue("b");
-        queue4.enqueue("c");
-        System.out.println("Queue size: " + queue4.size()); // Expected: 3
-        queue4.clear();
-        queue4.display(); // Expected: empty
-        System.out.println("Queue size after clear: " + queue4.size()); // Expected: 0
-        System.out.println();
+        // Test peek
+        System.out.println("\nPeek: " + queue.peek()); // Should return 10 (front element)
 
-        // Test Case 6: Dequeue on Empty Queue
-        System.out.println("Test Case 6: Dequeue on Empty Queue");
-        MyQueue<Integer> queue5 = new MyQueue<>(2);
-        System.out.println("Dequeued element from empty queue: " + queue5.dequeue()); // Expected: null
+        // Test dequeue operation
+        System.out.println("\nDequeueing elements...");
+        System.out.println("Dequeued: " + queue.dequeue()); // Should return 10
+        System.out.println("Dequeued: " + queue.dequeue()); // Should return 20
+        
+        // Display the queue after dequeues
+        System.out.print("Queue after dequeues: ");
+        queue.display(); // Output should be {30 40 50}
 
+        // Test size
+        System.out.println("\nCurrent size: " + queue.size()); // Should return 3
+
+        // Enqueue more elements
+        queue.enqueue(60);
+        queue.enqueue(70);
+
+        // Display the queue after more enqueues
+        System.out.print("Queue after more enqueues: ");
+        queue.display(); // Output should be {30 40 50 60 70}
+
+        // Test dequeue until the queue is empty
+        System.out.println("\nDequeueing all elements...");
+        while (!queue.isempty()) {
+            System.out.println("Dequeued: " + queue.dequeue());
+        }
+
+        // The queue should be empty now
+        System.out.println("Is the queue empty? " + queue.isempty()); // true
+        System.out.println("********************************************************8");
+                // Test isEmpty on an empty queue
+                System.out.println("Is the queue empty? " + queue.isempty()); // true
+
+                // Test enqueue operation
+                System.out.println("\nEnqueueing elements...");
+                queue.enqueue(10);
+                queue.enqueue(20);
+                queue.enqueue(30);
+                queue.enqueue(40);
+                queue.enqueue(50);
+                
+                // The queue should be full now
+                System.out.println("Is the queue full? " + queue.isfull()); // true
+                queue.enqueue(60); // This should print "queue is full"
+        
+                // Display the queue contents
+                System.out.print("Queue after enqueues: ");
+                queue.display(); // Output should be {10 20 30 40 50}
+        
+                // Test peek
+                System.out.println("\nPeek: " + queue.peek()); // Should return 10 (front element)
+        
+                // Test dequeue operation
+                System.out.println("\nDequeueing elements...");
+                System.out.println("Dequeued: " + queue.dequeue()); // Should return 10
+                System.out.println("Dequeued: " + queue.dequeue()); // Should return 20
+                
+                // Display the queue after dequeues
+                System.out.print("Queue after dequeues: ");
+                queue.display(); // Output should be {30 40 50}
+        
+                // Test size
+                System.out.println("\nCurrent size: " + queue.size()); // Should return 3
+        
+                // Enqueue more elements
+                queue.enqueue(60);
+                queue.enqueue(70);
+        
+                // Display the queue after more enqueues
+                System.out.print("Queue after more enqueues: ");
+                queue.display(); // Output should be {30 40 50 60 70}
+        
+                // Test dequeue until the queue is empty
+                System.out.println("\nDequeueing all elements...");
+                while (!queue.isempty()) {
+                    System.out.println("Dequeued: " + queue.dequeue());
+                }
+        
+                // The queue should be empty now
+                System.out.println("Is the queue empty? " + queue.isempty()); // true
     }
 }

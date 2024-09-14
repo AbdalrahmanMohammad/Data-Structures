@@ -1,11 +1,11 @@
-public class MyQueue<T> {
+public class MyCircularQueue<T> {
     T[] arr;
     int front;
     int rear;
     int size;
 
     @SuppressWarnings("unchecked")
-    MyQueue(int a) {
+    MyCircularQueue(int a) {
         arr = (T[]) new Object[a];
         front = 0;
         rear = -1;
@@ -16,7 +16,9 @@ public class MyQueue<T> {
         if (isfull()) {
             System.out.println("queue is full");
         } else {
-            arr[++rear] = t;
+            rear++;
+            rear = rear % arr.length;
+            arr[rear] = t;
             size++;
         }
     }
@@ -25,8 +27,11 @@ public class MyQueue<T> {
         if (!isempty()) {
             size--;
             T val = arr[front++];
-            if (isempty())
+            if (front >= arr.length)
+                front = front % arr.length;
+            if ((rear + 1) % arr.length == front) {
                 clear();
+            }
             return val;
         }
         return null;
@@ -40,11 +45,13 @@ public class MyQueue<T> {
     }
 
     public boolean isfull() {
-        return rear == arr.length - 1;
+        if (isempty())
+            return false;
+        return (rear + 1) % arr.length == front;
     }
 
     public boolean isempty() {
-        return rear < front;
+        return rear == -1;
     }
 
     public void clear() {
@@ -62,9 +69,13 @@ public class MyQueue<T> {
             System.out.println("empty");
         else {
             System.out.print("{");
-            for (int i = front; i <= rear; i++) {
-                System.out.print(arr[i] + " ");
+            int temp = front;
+            while (temp != rear) {
+                System.out.print(arr[temp] + " ");
+                temp++;
+                temp = temp % arr.length;
             }
+            System.out.print(arr[temp] + "");
             System.out.print("}");
         }
     }
