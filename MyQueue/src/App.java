@@ -23,6 +23,11 @@ public class App {
         dequeue.addLast(4); // Expected output: "queue is full"
         dequeue.display(); // Expected output: {-1 0 1 2 3}
 
+        System.out.println("****************************************");
+        for (Integer aa : dequeue)
+        System.out.println(aa);
+        dequeue.display();
+
         // Test removeFirst (dequeue equivalent)
         System.out.println("\nRemoving elements from the front (removeFirst):");
         System.out.println("Removed: " + dequeue.removeFirst()); // Should remove -1
@@ -40,6 +45,8 @@ public class App {
         // Test size
         System.out.println("\nChecking size:");
         System.out.println("Size: " + dequeue.size()); // Expected output: 3
+        for (Integer aa : dequeue)
+        System.out.println(aa);
 
         // Emptying the deque
         System.out.println("\nRemoving all elements:");
@@ -59,6 +66,8 @@ public class App {
 
         dequeue.addFirst(4);
         dequeue.addLast(1);
+        for (Integer aa : dequeue)
+            System.out.println(aa);
         dequeue.display(); // Expected output: {5}
 
         // Test clear function

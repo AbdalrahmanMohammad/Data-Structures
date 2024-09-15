@@ -1,4 +1,8 @@
-public class MyDequeue<T> {
+import java.util.Iterator;
+
+import org.w3c.dom.Node;
+
+public class MyDequeue<T> implements Iterable<T> {
     T[] arr;
     int front;
     int rear;
@@ -27,10 +31,9 @@ public class MyDequeue<T> {
         if (isfull()) {
             System.out.println("queue is full");
         } else {
-            if(isempty())
-            {
-                front=1;
-                rear=0;
+            if (isempty()) {
+                front = 1;
+                rear = 0;
             }
             front--;
             if (front < 0)
@@ -108,6 +111,39 @@ public class MyDequeue<T> {
             }
             System.out.print(arr[temp] + "");
             System.out.print("}");
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new myIterator();
+    }
+
+    private class myIterator implements Iterator<T> {
+        int f = front;
+        boolean flag = true;
+
+        @Override
+        public boolean hasNext() {
+            if (isempty())
+                return false;
+            if (flag && isfull()) {
+                flag = false;
+                return true;
+            }
+            if ((rear + 1) % arr.length == f)
+                return false;
+            return true;
+        }
+
+        @Override
+        public T next() {
+
+            T x = arr[f];
+            f++;
+            f = f % arr.length;
+
+            return x;
         }
     }
 
