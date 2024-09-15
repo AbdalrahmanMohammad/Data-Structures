@@ -1,18 +1,18 @@
-public class MyCircularQueue<T> {
+public class MyDequeue<T> {
     T[] arr;
     int front;
     int rear;
     int size;
 
     @SuppressWarnings("unchecked")
-    MyCircularQueue(int a) {
+    MyDequeue(int a) {
         arr = (T[]) new Object[a];
         front = 0;
         rear = -1;
         size = 0;
     }
 
-    public void enqueue(T t) {
+    public void addLast(T t) {// add last
         if (isfull()) {
             System.out.println("queue is full");
         } else {
@@ -23,12 +23,43 @@ public class MyCircularQueue<T> {
         }
     }
 
-    public T dequeue() {
+    public void addFirst(T t) {// add first
+        if (isfull()) {
+            System.out.println("queue is full");
+        } else {
+            if(isempty())
+            {
+                front=1;
+                rear=0;
+            }
+            front--;
+            if (front < 0)
+                front = arr.length - 1;
+            arr[front] = t;
+            size++;
+        }
+    }
+
+    public T removeFirst() {// remove first
         if (!isempty()) {
             size--;
             T val = arr[front++];
             if (front >= arr.length)
                 front = front % arr.length;
+            if ((rear + 1) % arr.length == front) {
+                clear();
+            }
+            return val;
+        }
+        return null;
+    }
+
+    public T removeLast() {
+        if (!isempty()) {
+            size--;
+            T val = arr[rear--];
+            if (rear < 0)
+                rear = arr.length - 1;
             if ((rear + 1) % arr.length == front) {
                 clear();
             }
