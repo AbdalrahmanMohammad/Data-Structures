@@ -6,16 +6,16 @@ public class MyAvlTree<T extends Comparable<T>> {
     }
 
     public void insert(T value) {
-        root = insertRec(root, value);
+        root = insertRec(root, new Node<>(value));
     }
 
-    private Node<T> insertRec(Node<T> root, T value) {
+    private Node<T> insertRec(Node<T> root, Node<T> value) {
         if (root == null) {
-            return new Node<>(value);
+            return value;
         }
-        if (value.compareTo(root.getValue()) > 0) {
+        if (value.getValue().compareTo(root.getValue()) > 0) {
             root.setRight(insertRec(root.getRight(), value));
-        } else if (value.compareTo(root.getValue()) < 0) {
+        } else if (value.getValue().compareTo(root.getValue()) < 0) {
             root.setLeft(insertRec(root.getLeft(), value));
         }
         return root;
@@ -133,18 +133,6 @@ public class MyAvlTree<T extends Comparable<T>> {
             return findMaxRec(root.getRight());
     }
 
-    public int height() {
-        return heightOfTree(root);
-    }
-
-    private int heightOfTree(Node<T> root) {
-        if (root == null)
-            return -1;
-        if (root.getLeft() == null && root.getRight() == null)// not really important
-            return 0;
-        return 1 + Math.max(heightOfTree(root.getLeft()), heightOfTree(root.getRight()));
-    }
-
     public boolean isBST() {
         return isBSTRec(root, null, null);
     }
@@ -162,4 +150,53 @@ public class MyAvlTree<T extends Comparable<T>> {
         return isBSTRec(node.getLeft(), min, node.getValue()) && isBSTRec(node.getRight(), node.getValue(), max);
     }
 
+    private int getBalance(Node<T> node) {
+        if (node == null) {
+            return 0; // Balance factor of a null node is 0
+        }
+        int leftHeight = (node.getLeft() != null) ? node.getLeft().getHeight() : 0;
+        int rightHeight = (node.getRight() != null) ? node.getRight().getHeight() : 0;
+        return leftHeight - rightHeight;
+    }
+
+    private void updateHeight(Node<T> node) {
+        if (node != null) {
+            int leftHeight = (node.getLeft() != null) ? node.getLeft().getHeight() : 0;
+            int rightHeight = (node.getRight() != null) ? node.getRight().getHeight() : 0;
+            node.setHeight(1 + Math.max(leftHeight, rightHeight));
+        }
+    }
+
+    private int height(Node<T> node) {
+        return node == null ? 0 : node.getHeight();
+    }
+
+    // Rotations
+    private Node<T> rotateLeft(Node<T> y) {
+        Node<T> newNode = y.getRight();
+        Node<T> prev = newNode.getLeft();//deal later
+        insertRec(newNode, prev);
+        newNode.setLeft(y);
+        return newNode;
+    }
+
+    private Node<T> rotateRight(Node<T> y) {
+        Node<T> newNode = y.getLeft();
+        Node<T> prev = newNode.getRight();//deal later
+        insertRec(newNode, prev);
+        newNode.setRight(y);
+        return newNode;
+    }
+
+    private Node<T> rotateLeftRight(Node<T> node) {
+        Node<T> left=node.getLeft();
+        node.setLeft(rotateLeft(left));
+        return rotateRight(node);
+    }
+
+    private Node<T> rotateRightLeft(Node<T> node) {
+        Node<T> right=node.getRight();
+        node.setRight(rotateRight(right));
+        return rotateLeft(node);
+    }
 }
