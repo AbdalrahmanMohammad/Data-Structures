@@ -1,6 +1,6 @@
 public class App {
     public static void main(String[] args) throws Exception {
-        MyBinarySearchTree<Integer> bst = new MyBinarySearchTree<>();
+        MyAvlTree<Integer> bst = new MyAvlTree<>();
 
         // Test insertion
         System.out.println("Inserting values: 50, 30, 20, 40, 70, 60, 80");

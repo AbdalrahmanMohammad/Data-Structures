@@ -1,7 +1,7 @@
-public class MyBinarySearchTree<T extends Comparable<T>> {
+public class MyAvlTree<T extends Comparable<T>> {
     private Node<T> root; // Root of the BST
 
-    public MyBinarySearchTree() {
+    public MyAvlTree() {
         root = null;
     }
 
